@@ -58,7 +58,7 @@ public class Trie {
 
 	public void delete(String s) {
 		if (!contains(s)) {
-			System.out.println("Does not exist");
+			System.out.println("The word does not exist");
 		} else {
 			delete(root, s, 0);
 		}

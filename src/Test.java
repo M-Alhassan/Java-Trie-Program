@@ -8,7 +8,20 @@ public class Test {
 				+ "\tDlete a word:\t\t\t\t\tdeletes a word from the existing trie (provided by user).\n"
 				+ "\tList all words that begin with a prefix:\tfinds all the words in the trie that begins with the prefix (provided by user).\n"
 				+ "\tSize of the trie:\t\t\t\tdisplays the number of letters in the trie.\n"
-				+ "\tEnd:\t\t\t\t\t\tTerminates the program.\n" + "\tType -v to view the selection menu");
+				+ "\tEnd:\t\t\t\t\t\tTerminates the program.\n");
+		System.out.println("\tComands:\n"
+				+ "	-h\thelp\n"
+				+ "	-v\tview the menu\n"
+				+ "	-info\tdisplay information about the trie data structure");
+	}
+	
+	public static void displayInfo() {
+		System.out.println("The word \"Trie\" is an excerpt from the word \"retrieval\".\n"
+				+ "Trie is a sorted tree-based data-structure that stores the set of strings.\n"
+				+ "It has the number of pointers equal to the number of characters of the alphabet in each node.\n"
+				+ "It can search a word in the dictionary with the help of the word's prefix.\n"
+				+ "For example, if we assume that all strings are formed from the letters 'a' to 'z' in the English alphabet.\n"
+				+ "Each trie node can have a maximum of 26 points.");
 	}
 
 	public static void displayMenu() {
@@ -19,7 +32,7 @@ public class Test {
 		System.out.println("\t5) List all words that begin with a prefix");
 		System.out.println("\t6) Size of the trie");
 		System.out.println("\t7) End");
-		System.out.println("\tType -h for help");
+		System.out.println("\n\t-h for help");
 	}
 
 	public static void main(String[] args) {
@@ -72,6 +85,10 @@ public class Test {
 				displayMenu();
 			} else if (choice.equals("-h")) {
 				displayHelp();
+			} else if(choice.equals("-info")) {
+				displayInfo();
+			} else {
+				System.out.println("command not found");
 			}
 
 		}
