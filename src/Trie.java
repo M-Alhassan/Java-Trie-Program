@@ -14,12 +14,12 @@ public class Trie {
 		TrieNode node = root; // root
 		for (char ch : s.toCharArray()) {
 			// if the character exists in the trie then use it, else, create a new one
-			if (node.keys[ch - 'a'] == null) { // ch - 'a' is the index of the character in the string
-				node.keys[ch - 'a'] = new TrieNode();
+			if (node.keys[ch - 'A'] == null) { // ch - 'A' is the index of the character in the string
+				node.keys[ch - 'A'] = new TrieNode();
 				size++;
 			}
 
-			node = node.keys[ch - 'a'];
+			node = node.keys[ch - 'A'];
 		}
 		// end of string
 		node.setEndOfString(true);
@@ -30,13 +30,14 @@ public class Trie {
 		return isMatch(s, root, 0, true);
 	}
 
+	// helper method to check if the string is a prefix nor not
 	public boolean isMatch(String s, TrieNode node, int index, boolean isFullMatch) {
 		if (node == null)
 			return false;
 		if (index == s.length()) {
 			return !isFullMatch || node.endOfString;
 		}
-		return isMatch(s, node.keys[s.charAt(index) - 'a'], index + 1, isFullMatch);
+		return isMatch(s, node.keys[s.charAt(index) - 'A'], index + 1, isFullMatch);
 	}
 
 	public boolean isEmpty() {
@@ -49,6 +50,7 @@ public class Trie {
 		return empty;
 	}
 
+	// clear method sets all the keys to null && resets the size to 0
 	public void clear() {
 		for (int i = 0; i < 26; i++) {
 			this.root.keys[i] = null;
@@ -56,6 +58,7 @@ public class Trie {
 		size = 0;
 	}
 
+	// a method to delete strings
 	public void delete(String s) {
 		if (!contains(s)) {
 			System.out.println("The word does not exist");
@@ -64,6 +67,7 @@ public class Trie {
 		}
 	}
 
+	// delete helper method
 	public boolean delete(TrieNode current, String word, int index) {
 		if (index == word.length()) {
 			if (!current.isEndOfString()) {
@@ -74,22 +78,24 @@ public class Trie {
 			return isEmpty();
 		}
 		char ch = word.charAt(index);
-		TrieNode node = current.keys[ch - 'a'];
+		TrieNode node = current.keys[ch - 'A'];
 		if (node == null) {
 			return false;
 		}
 		boolean deleteNode = delete(node, word, index + 1) && !node.isEndOfString();
 		if (deleteNode) {
-			current.keys[ch - 'a'] = null;
+			current.keys[ch - 'A'] = null;
 			return isEmpty();
 		}
 		return false;
 	}
 
+	// checks if the string is a prefix to not
 	public boolean isPrefix(String s) {
 		return isMatch(s, root, 0, false);
 	}
 
+	// a method to count all words for a given prefix
 	public String[] allWordsPrefix(String p) {
 
 		TrieNode node = root;
@@ -102,7 +108,7 @@ public class Trie {
 		Stack<String> stack2 = new Stack<>();
 
 		for (int i = 0; i < p.length(); ++i) {
-			node = node.keys[p.charAt(i) - 'a'];
+			node = node.keys[p.charAt(i) - 'A'];
 		}
 		stack1.push(node);
 		stack2.push(p);
@@ -117,7 +123,7 @@ public class Trie {
 			for (TrieNode keyNode : node.keys) {
 				if (keyNode != null) {
 					stack1.push(keyNode);
-					stack2.push(p + ((char) ('a' + count)));
+					stack2.push(p + ((char) ('A' + count)));
 				}
 				count++;
 			}
@@ -134,47 +140,5 @@ public class Trie {
 
 	public int size() {
 		return size;
-	}
-
-	public static void main(String[] Args) {
-		Trie trie = new Trie();
-		System.out.println("inserting cat...");
-		trie.insert("cat");
-		System.out.println("inserting car...");
-		trie.insert("car");
-		System.out.println("insering dog...");
-		trie.insert("dog");
-		System.out.println("insering pick...");
-		trie.insert("pick");
-		System.out.println("insering pickle...");
-		trie.insert("pickle");
-		System.out.println("is trie empty? >> " + trie.isEmpty());
-		System.out.println("Contains cat >> " + trie.contains("cat"));
-		System.out.println("Contains can >> " + trie.contains("can"));
-		System.out.println("is \"do\" a prefix >> " + trie.isPrefix("do"));
-		System.out.println("is \"d\" a prefix >> " + trie.isPrefix("d"));
-		System.out.println("deleting cat...");
-		trie.delete("cat");
-		System.out.println("Contains cat >> " + trie.contains("cat"));
-		System.out.println("deleting pickle...");
-		// trie.delete("pickle");
-		System.out.println("Contains pickle >> " + trie.contains("pickle"));
-		System.out.println("Contains pick >> " + trie.contains("pick"));
-		System.out.println("Trie size >> " + trie.size());
-		System.out.println("pi all words prefix ");
-		String list1[] = trie.allWordsPrefix("pi");
-		for (int i = 0; i < list1.length; i++) {
-			System.out.println(list1[i]);
-		}
-		System.out.println("po all words ");
-		String list2[] = trie.allWordsPrefix("po");
-		for (int i = 0; i < list2.length; i++) {
-			System.out.println(list2[i]);
-		}
-
-//		System.out.println("Clearing Trie...");
-//		trie.clear();
-//		System.out.println("is trie empty? >> " + trie.isEmpty());
-//		System.out.println("Trie size >> " + trie.size());
 	}
 }
