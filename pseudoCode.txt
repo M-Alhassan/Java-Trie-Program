@@ -103,24 +103,66 @@ Trie:
 		}
 		
 		7- isEmpty() {
-		loops through each index of the array
-		if all nodes are null, it will return true
+			loops through each index of the array
+			if all nodes are null, it will return true
 		}
 		
 		8- clear(){
-		sets all nodes to null and resets size to 0
+			sets all nodes to null and resets size to 0
 		}
 		
 		9- allWordsPrefix(String p){
-		create a new node and assign it to root.
-		it will create 2 stacks and an ArrayList to store the result in.
-		assign the node to the possision of the last letter of the string.
-		push the node (last letter) in stack1
-		push the string in stack2
+			create a new node and assign it to root.
+			it will create 2 stacks and an ArrayList to store the result in.
+			assign the node to the possision of the last letter of the string.
+			push the node (last letter) in stack1
+			push the string in stack2
 		
-		while both stacks are not empty:
-			node is assigned to the popped element of stack1.
-			the string is assigned to the popped element of stack2.
-			//line 118^
-			
+			while both stacks are not empty:
+				node is assigned to the popped element of stack1.
+				the string is assigned to the popped element of stack2.
+				if the node is the end of the string the string will be added to the list.
+				initialize a counter.
+				for each node:
+					if the current key node is not null, stack1 will push the key node
+					and stack 2 will push the string + 'A's ASCII value + the counter).
+					encrement the counter.
+					convert the Array List to an array.
+			}
+		
+		10- size(){
+			return size
 		}
+====================================================================================
+Trie Driver:
+
+ArrayList<String> getPermutations (String s){
+	create a new ArrayList type string.
+	Base case: if s.length == 0, return the ArrayList.
+	Recursive case:
+		assign firstCh to the first character of the string.
+		assign subStr to the rest of the string.
+		create a new ArrayList which is equal to a recursive call of this method for subStr.
+		/* 
+		*  newList = getPermutations(subStr)
+		*		subStr.firstCh saved for later use
+		*	newList = getPermutations(subStr.subStr)
+		*			subStr.subStr.firstCh saved for later use
+		*	 newList = getPermutations(subStr.subStr...subStr)
+		*				subStr.subStr...firstCh saved for later use
+		*/
+	After recurstion:
+		for each word in the second list:
+			for (int i = 0; i < word.length(); i++)
+				add to the first list:
+					(word.substring(0, i) + firstCh + last character)
+
+	return the ArrayList
+}
+
+this will give us the permutations only (different arrangements of the letters in a word)
+however, for the combinations (permutaions for all letters in that word (can be shorter)),
+we will take all of the substrings of the permutations.
+
+Combinations is used for operation #2.
+
