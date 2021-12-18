@@ -20,8 +20,7 @@ public class TrieDriver {
 				+ "Trie is a sorted tree-based data-structure that stores the set of strings.\n"
 				+ "It has the number of pointers equal to the number of characters of the alphabet in each node.\n"
 				+ "It can search a word in the dictionary with the help of the word's prefix.\n"
-				+ "For example, if we assume that all strings are formed from the letters 'a' to 'z' in the English alphabet.\n"
-				+ "Each trie node can have a maximum of 26 points.");
+				+ "For example, if we assume that all strings are formed from the letters 'a' to 'z' in the English alphabet.\n");
 	}
 
 	/*
@@ -83,7 +82,6 @@ public class TrieDriver {
 				} else if (choice.equals("2")) {
 					trie = new Trie();
 					ArrayList<String> dict = new ArrayList<String>();
-
 					FileReader fr = new FileReader(new File("Dictionary.txt"));
 					BufferedReader br = new BufferedReader(fr);
 					String line = "";
@@ -93,35 +91,40 @@ public class TrieDriver {
 
 					System.out.print("Enter the letters: ");
 					String letters = kb.nextLine().toUpperCase();
-					ArrayList<String> permutations = getPermutations(letters); // create permutations
-					ArrayList<String> combinations = new ArrayList<String>(); // create combinations
+					if (letters.equals(null) || letters.equals("") || letters.contains(" ")) {
+						System.err.println("Invalid Input! Type -h for help");
+					} else {
+						ArrayList<String> permutations = getPermutations(letters); // create permutations
+						ArrayList<String> combinations = new ArrayList<String>(); // create combinations
 
-					// creating the combinations by taking all substrings of the permutations
-					// (excluding duplicates):
-					for (String word : permutations) {
-						word = word.toUpperCase();
-						for (int i = 2; i <= word.length(); i++) {
-							if (!combinations.contains(word.substring(0, i)) && dict.contains(word.substring(0, i))) {
-								combinations.add(word.substring(0, i));
+						// creating the combinations by taking all substrings of the permutations
+						// (excluding duplicates):
+						for (String word : permutations) {
+							word = word.toUpperCase();
+							for (int i = 2; i <= word.length(); i++) {
+								if (!combinations.contains(word.substring(0, i))
+										&& dict.contains(word.substring(0, i))) {
+									combinations.add(word.substring(0, i));
+								}
 							}
 						}
+						for (String word : combinations) {
+							trie.insert(word);
+						}
+						System.out.println("Trie created!");
 					}
-					for (String word : combinations) {
-						trie.insert(word);
-					}
-					System.out.println("Trie created!");
 				} else if (choice.equals("3")) {
 					System.out.println("Please enter a word: ");
-					String word = kb.nextLine().toUpperCase() ;
+					String word = kb.nextLine().toUpperCase();
 					trie.insert(word);
 					System.out.println(word + " inserted!");
 				} else if (choice.equals("4")) {
 					System.out.print("Enter a word to delete: ");
 					String word = kb.nextLine().toUpperCase();
 					trie.delete(word);
-					if (trie.contains(word))
+					if (trie.contains(word)) {
 						System.out.println(word + " deleted");
-
+					}
 				} else if (choice.equals("5")) {
 					System.out.print("Enter the prefix: ");
 					String prefix = kb.nextLine().toUpperCase();
@@ -146,14 +149,15 @@ public class TrieDriver {
 				} else if (choice.equals("-info")) {
 					displayInfo();
 				} else {
-					System.out.println("command not found");
+					System.out.println("Operation does not exist");
+					System.out.println("Please choose 1-7 or type -h for help");
 				}
 			} catch (Exception e) {
 				System.err.println("Invalid Input! Type -h for help");
 			}
 		}
 		kb.close();
-		System.out.println("Terminating program");
+		System.out.println("Terminating program...");
 		System.exit(0);
 
 	}
