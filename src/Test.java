@@ -24,10 +24,12 @@ public class Test {
 				+ "Each trie node can have a maximum of 26 points.");
 	}
 
-	// permutations are the different arrangements of the letters in a word
-	// (same size of the original word)
-	// combinations are all strings that can be formed from the letters of a string
-	// (doesn't have to be the same size of the original word)
+	/*
+	 * permutations are the different arrangements of the letters in a word (same
+	 * size of the original word) combinations are all strings that can be formed
+	 * from the letters of a string (doesn't have to be the same size of the
+	 * original word)
+	 */
 
 	// method to create an ArrayList of all permutations of a string
 	public static ArrayList<String> getPermutations(String s) {

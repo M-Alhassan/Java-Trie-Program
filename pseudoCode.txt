@@ -1,0 +1,126 @@
+Trie Node:
+	Attributes:
+		1- endOfString (boolean)
+		2- keys (TrieNode[])
+	
+	Constructors:
+		TrieNode() {
+			sets endOfString to false.
+			sets keys to TrieNode[26] (number of alphabets).
+		}
+	
+	Methods:
+		1- isEndOfString() {
+				getter for endOfString.
+			}
+		2- setEndOfString(boolean endOfString) {
+				setter for endOfString.
+			}
+====================================================================================
+Trie:
+	Attributes:
+		1- root (TrieNode)
+		2- size (int)
+	
+	Constructors:
+		Trie() {
+			sets root to new TrieNode
+			sets size to 0
+		}
+		
+	Methods:
+		1- isMatch(String s, TrieNode node, int index, bolean isFullMatch) {
+				parameters:
+					s:  the string to check for
+					node: the current node (letter)
+					index: where to start from the array
+					isFullMatch: indicates if we want a whole word match or prefix
+				
+				algorithm:
+					1- if the node is null it will return false.
+					2- if the index is the length of the given string,
+					3- it will return true if either is true:
+						- NOT a full match.
+						- node is end of string.
+					4- else:
+						it will return a recursive call for the same string
+						but the node will be the next letter of the string
+						and the index will increment
+						and the same given isFullMatch in the parameters
+		}
+		
+		2- contains(String s) {
+				return isMatch(s, root, 0, true)
+					root is where we start
+					0 is the first letter of the trie.
+					true for full word check.
+		}
+		
+		3- isPrefix(String s) {
+			the same as the contains method but isFullMatch is false
+			
+		}
+		
+		4- insert(String s) {
+			creates a new node and assigns it to root.
+			for each letter of the string:
+		 		if the position of the letter is null in the array,
+				it will create a new node for it and increase its size.
+			
+			Assigns node to the correct letter possition in the array.
+			Sets EndOfString true.
+		}
+		
+		5- delete(String s) {
+			calls the delete helper method.
+		}
+		
+		*recursive boolean helper method for deletion*
+		6- delete(TrieNode current, String word, int index) {
+			parameters:
+				currentNode: the current node the method is working with
+				word: the wanted string to delete
+				index: the current index of the array.
+			Algorithm:
+				if the index is the last letter of the string:
+					if the current letter is not the last letter of the string
+						 return false.
+					else:
+					endOfString will be set to false for the current node
+					return isEmpty()
+				else:
+				node will be assigned the posission of the current letter.
+				if the node is empty the method will return false.
+				else, it create a new boolean variable called deleteNode.
+				deleteNode will be initialized to:
+					delete(node, word, index + 1) && !endOfString()
+				so if either: delete() == false or endOfString() == false
+					deleteNode will be false.
+				if deleteNode is true it will assign the node of the letter to null.
+				then returns isEmpty()
+				else:
+					return false.
+		}
+		
+		7- isEmpty() {
+		loops through each index of the array
+		if all nodes are null, it will return true
+		}
+		
+		8- clear(){
+		sets all nodes to null and resets size to 0
+		}
+		
+		9- allWordsPrefix(String p){
+		create a new node and assign it to root.
+		it will create 2 stacks and an ArrayList to store the result in.
+		assign the node to the possision of the last letter of the string.
+		push the node (last letter) in stack1
+		push the string in stack2
+		
+		while both stacks are not empty:
+			node is assigned to the popped element of stack1.
+			the string is assigned to the popped element of stack2.
+			//line 118^
+			
+		}

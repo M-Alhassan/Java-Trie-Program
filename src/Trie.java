@@ -9,28 +9,7 @@ public class Trie {
 		this.size = 0;
 	}
 
-	// insert method
-	public void insert(String s) {
-		TrieNode node = root; // root
-		for (char ch : s.toCharArray()) {
-			// if the character exists in the trie then use it, else, create a new one
-			if (node.keys[ch - 'A'] == null) { // ch - 'A' is the index of the character in the string
-				node.keys[ch - 'A'] = new TrieNode();
-				size++;
-			}
-
-			node = node.keys[ch - 'A'];
-		}
-		// end of string
-		node.setEndOfString(true);
-	}
-
-	// contains method
-	public boolean contains(String s) {
-		return isMatch(s, root, 0, true);
-	}
-
-	// helper method to check if the string is a prefix nor not
+	// helper method
 	public boolean isMatch(String s, TrieNode node, int index, boolean isFullMatch) {
 		if (node == null)
 			return false;
@@ -40,22 +19,29 @@ public class Trie {
 		return isMatch(s, node.keys[s.charAt(index) - 'A'], index + 1, isFullMatch);
 	}
 
-	public boolean isEmpty() {
-		boolean empty = true;
-		for (TrieNode node : root.keys) {
-			if (node != null) {
-				empty = false;
-			}
-		}
-		return empty;
+	// checks if the trie contains the String (full word)
+	public boolean contains(String s) {
+		return isMatch(s, root, 0, true);
 	}
 
-	// clear method sets all the keys to null && resets the size to 0
-	public void clear() {
-		for (int i = 0; i < 26; i++) {
-			this.root.keys[i] = null;
+	// checks if the string is a prefix in the trie
+	public boolean isPrefix(String s) {
+		return isMatch(s, root, 0, false);
+	}
+
+	// insert a new string in the trie
+	public void insert(String s) {
+		TrieNode node = root; // root
+		for (char ch : s.toCharArray()) {
+			// if the character exists in the trie then use it, else, create a new one
+			if (node.keys[ch - 'A'] == null) { // ch - 'A' is the index of the character in the string
+				node.keys[ch - 'A'] = new TrieNode();
+				size++;
+			}
+			node = node.keys[ch - 'A'];
 		}
-		size = 0;
+		// end of string
+		node.setEndOfString(true);
 	}
 
 	// a method to delete strings
@@ -89,10 +75,24 @@ public class Trie {
 		}
 		return false;
 	}
+	
+	// checks if the trie is empty or not
+	public boolean isEmpty() {
+		boolean empty = true;
+		for (TrieNode node : root.keys) {
+			if (node != null) {
+				empty = false;
+			}
+		}
+		return empty;
+	}
 
-	// checks if the string is a prefix to not
-	public boolean isPrefix(String s) {
-		return isMatch(s, root, 0, false);
+	// clear method sets all the keys to null & resets the size to 0
+	public void clear() {
+		for (int i = 0; i < 26; i++) {
+			this.root.keys[i] = null;
+		}
+		size = 0;
 	}
 
 	// a method to count all words for a given prefix
