@@ -1,14 +1,14 @@
 import java.util.*;
 import java.io.*;
 
-public class Test {
+public class TrieDriver {
 	public static void displayHelp() {
 		System.out.println("\n\tCreate an empty trie:\t\t\t\tcreates a new empty trie.\n"
-				+ "\tCreate a trie with initial letters:\t\tgenerate all permutations of the letters and insert valid words in the trie (provided by user).\n"
+				+ "\tCreate a trie with initial letters:\t\tgenerate all permutations of the letters from dicitonary and insert valid words in the trie.\n"
 
-				+ "\tInsert a word:\t\t\t\t\tinsert a new word to the existing trie (provided by user).\n"
-				+ "\tDlete a word:\t\t\t\t\tdeletes a word from the existing trie (provided by user).\n"
-				+ "\tList all words that begin with a prefix:\tfinds all the words in the trie that begins with the prefix (provided by user).\n"
+				+ "\tInsert a word:\t\t\t\t\tinsert a new word to the existing trie.\n"
+				+ "\tDlete a word:\t\t\t\t\tdeletes a word from the existing trie.\n"
+				+ "\tList all words that begin with a prefix:\tfinds all the words in the trie that begins with the prefix.\n"
 				+ "\tSize of the trie:\t\t\t\tdisplays the number of letters in the trie.\n"
 				+ "\tEnd:\t\t\t\t\t\tTerminates the program.\n");
 		System.out.println("\tComands:\n" + "	-h\thelp\n" + "	-v\tview the menu\n"
@@ -92,7 +92,7 @@ public class Test {
 					}
 
 					System.out.print("Enter the letters: ");
-					String letters = kb.nextLine();
+					String letters = kb.nextLine().toUpperCase();
 					ArrayList<String> permutations = getPermutations(letters); // create permutations
 					ArrayList<String> combinations = new ArrayList<String>(); // create combinations
 
@@ -112,19 +112,19 @@ public class Test {
 					System.out.println("Trie created!");
 				} else if (choice.equals("3")) {
 					System.out.println("Please enter a word: ");
-					String word = kb.nextLine();
+					String word = kb.nextLine().toUpperCase() ;
 					trie.insert(word);
 					System.out.println(word + " inserted!");
 				} else if (choice.equals("4")) {
 					System.out.print("Enter a word to delete: ");
-					String word = kb.nextLine();
+					String word = kb.nextLine().toUpperCase();
 					trie.delete(word);
 					if (trie.contains(word))
 						System.out.println(word + " deleted");
 
 				} else if (choice.equals("5")) {
 					System.out.print("Enter the prefix: ");
-					String prefix = kb.nextLine();
+					String prefix = kb.nextLine().toUpperCase();
 					String list[] = trie.allWordsPrefix(prefix);
 					if (list.length == 0) {
 						System.out.println("The prefix does not exist in the trie.");
@@ -149,7 +149,7 @@ public class Test {
 					System.out.println("command not found");
 				}
 			} catch (Exception e) {
-				System.err.println("ERROR! Type -h for help");
+				System.err.println("Invalid Input! Type -h for help");
 			}
 		}
 		kb.close();
