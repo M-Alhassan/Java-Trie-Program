@@ -121,7 +121,7 @@ public class TrieDriver {
 				} 
 				//operation 3
 				else if (choice.equals("3")) {
-					System.out.println("Please enter a word: ");
+					System.out.print("Please enter a word: ");
 					String word = kb.nextLine().toUpperCase();
 					trie.insert(word);
 					System.out.println(word + " inserted!");

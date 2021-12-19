@@ -57,25 +57,30 @@ public class Trie {
 	public boolean delete(TrieNode current, String word, int index) {
 		if (index == word.length()) {
 			if (!current.isEndOfString()) {
+				System.out.println("one");
 				return false;
 			}
 			size--;
 			current.setEndOfString(false);
+			System.out.println("two");
 			return isEmpty();
 		}
 		char ch = word.charAt(index);
 		TrieNode node = current.keys[ch - 'A'];
 		if (node == null) {
+			System.out.println("three");
 			return false;
 		}
 		boolean deleteNode = delete(node, word, index + 1) && !node.isEndOfString();
 		if (deleteNode) {
 			current.keys[ch - 'A'] = null;
+			System.out.println("four");
 			return isEmpty();
 		}
+		System.out.println("five");
 		return false;
 	}
-	
+
 	// checks if the trie is empty or not
 	public boolean isEmpty() {
 		boolean empty = true;
@@ -119,14 +124,14 @@ public class Trie {
 			if (node.isEndOfString()) {
 				result.add(p);
 			}
-			int count = 0;
-			for (TrieNode keyNode : node.keys) {
-				if (keyNode != null) {
-					stack1.push(keyNode);
-					stack2.push(p + ((char) ('A' + count)));
+				int count = 0;
+				for (TrieNode keyNode : node.keys) {
+					if (keyNode != null) {
+						stack1.push(keyNode);
+						stack2.push(p + ((char) ('A' + count)));
+					}
+					count++;
 				}
-				count++;
-			}
 		}
 		String[] finalResult = new String[result.size()];
 		int i = 0;
