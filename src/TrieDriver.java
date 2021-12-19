@@ -54,6 +54,7 @@ public class TrieDriver {
 		return permutations; // returns the permutations of the string
 	}
 
+	//method to print the operation menu
 	public static void displayMenu() {
 		System.out.println("\t1) Create an empty trie");
 		System.out.println("\t2) Create a trie with initial letters");
@@ -65,6 +66,7 @@ public class TrieDriver {
 		System.out.println("\n\t-h for help");
 	}
 
+	//main method
 	public static void main(String[] args) {
 		Trie trie = null;
 		Scanner kb = new Scanner(System.in);
@@ -75,11 +77,13 @@ public class TrieDriver {
 				System.out.println("------------------------------------------");
 				System.out.print("please select an operation: ");
 				String choice = kb.nextLine();
-				// kb.nextLine();
+				//operation 1
 				if (choice.equals("1")) {
 					trie = new Trie();
 					System.out.println("Trie created!");
-				} else if (choice.equals("2")) {
+				} 
+				//operation 2
+				else if (choice.equals("2")) {
 					trie = new Trie();
 					ArrayList<String> dict = new ArrayList<String>();
 					FileReader fr = new FileReader(new File("Dictionary.txt"));
@@ -108,24 +112,31 @@ public class TrieDriver {
 								}
 							}
 						}
+						//inserting the words' combinations to the trie
 						for (String word : combinations) {
 							trie.insert(word);
 						}
 						System.out.println("Trie created!");
 					}
-				} else if (choice.equals("3")) {
+				} 
+				//operation 3
+				else if (choice.equals("3")) {
 					System.out.println("Please enter a word: ");
 					String word = kb.nextLine().toUpperCase();
 					trie.insert(word);
 					System.out.println(word + " inserted!");
-				} else if (choice.equals("4")) {
+				} 
+				//operation 4
+				else if (choice.equals("4")) {
 					System.out.print("Enter a word to delete: ");
 					String word = kb.nextLine().toUpperCase();
 					trie.delete(word);
 					if (trie.contains(word)) {
 						System.out.println(word + " deleted");
 					}
-				} else if (choice.equals("5")) {
+				}
+				//operation 5
+				else if (choice.equals("5")) {
 					System.out.print("Enter the prefix: ");
 					String prefix = kb.nextLine().toUpperCase();
 					String list[] = trie.allWordsPrefix(prefix);
@@ -138,17 +149,29 @@ public class TrieDriver {
 						}
 					}
 					System.out.println("");
-				} else if (choice.equals("6")) {
+				} 
+				//operation 6
+				else if (choice.equals("6")) {
 					System.out.println("The trie size is: " + trie.size());
-				} else if (choice.equals("7")) {
+				} 
+				//operation 7
+				else if (choice.equals("7")) {
 					break;
-				} else if (choice.equals("-v")) {
+				}
+				// -v
+				else if (choice.equals("-v")) {
 					displayMenu();
-				} else if (choice.equals("-h")) {
+				} 
+				//-h
+				else if (choice.equals("-h")) {
 					displayHelp();
-				} else if (choice.equals("-info")) {
+				}
+				//-info
+				else if (choice.equals("-info")) {
 					displayInfo();
-				} else {
+				} 
+				// other input
+				else {
 					System.out.println("Operation does not exist");
 					System.out.println("Please choose 1-7 or type -h for help");
 				}
