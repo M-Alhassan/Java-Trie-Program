@@ -57,27 +57,22 @@ public class Trie {
 	public boolean delete(TrieNode current, String word, int index) {
 		if (index == word.length()) {
 			if (!current.isEndOfString()) {
-				System.out.println("one");
 				return false;
 			}
 			size--;
 			current.setEndOfString(false);
-			System.out.println("two");
 			return isEmpty();
 		}
 		char ch = word.charAt(index);
 		TrieNode node = current.keys[ch - 'A'];
 		if (node == null) {
-			System.out.println("three");
 			return false;
 		}
 		boolean deleteNode = delete(node, word, index + 1) && !node.isEndOfString();
 		if (deleteNode) {
 			current.keys[ch - 'A'] = null;
-			System.out.println("four");
 			return isEmpty();
 		}
-		System.out.println("five");
 		return false;
 	}
 
