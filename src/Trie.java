@@ -128,6 +128,8 @@ public class Trie {
 					count++;
 				}
 		}
+		
+		//convert ArrayList to array
 		String[] finalResult = new String[result.size()];
 		int i = 0;
 		for (String str : result) {
