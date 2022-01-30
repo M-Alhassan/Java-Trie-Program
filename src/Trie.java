@@ -119,17 +119,17 @@ public class Trie {
 			if (node.isEndOfString()) {
 				result.add(p);
 			}
-				int count = 0;
-				for (TrieNode keyNode : node.keys) {
-					if (keyNode != null) {
-						stack1.push(keyNode);
-						stack2.push(p + ((char) ('A' + count)));
-					}
-					count++;
+			int count = 0;
+			for (TrieNode keyNode : node.keys) {
+				if (keyNode != null) {
+					stack1.push(keyNode);
+					stack2.push(p + ((char) ('A' + count)));
 				}
+				count++;
+			}
 		}
-		
-		//convert ArrayList to array
+
+		// convert ArrayList to array
 		String[] finalResult = new String[result.size()];
 		int i = 0;
 		for (String str : result) {
@@ -138,6 +138,25 @@ public class Trie {
 		}
 		return finalResult;
 
+	}
+
+	public int getSize() {
+		ArrayList<String> list = new ArrayList<String>();
+		int count = 0;
+		char c = 'A';
+		for (int i = 0; i < 26; i++) {
+			String[] array = allWordsPrefix(((char) ('A' + i)) + "");
+			for(String word: array) {
+				list.add(word);
+			}
+		}
+		String str ="";
+		for(String word: list) {
+			str += word;
+		}
+		System.out.println(list);
+		count = str.length();
+		return count;
 	}
 
 	public int size() {

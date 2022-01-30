@@ -169,6 +169,10 @@ public class TrieDriver {
 				// -info
 				else if (choice.equals("-info")) {
 					displayInfo();
+				} 
+				
+				else if(choice.equals("0")) {
+					System.out.println(trie.getSize());
 				}
 				// other input
 				else {
