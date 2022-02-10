@@ -2,7 +2,7 @@
 
 Program that allows the user to generate a trie data structure and sort some words into the trie. A trie is a data structure that permits efficient lookup of words in a dictionary.
 
-<img src="./trie.png/" alt="Trie data structure" width="100%"/>
+<img src="./trie.png/" alt="Trie data structure" width="70%"/>
 
 ## ⚙️ Technologies
 
